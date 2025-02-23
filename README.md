@@ -18,7 +18,7 @@ A C# console tool that downloads multiple Google Sheets tabs as CSV files based 
 | ````JsonCredentialFilePath```` | Your credential json file. |
 5. Open any of your spreadsheet and create a sheet tab, name the tab ````TableConfig````. You will be putting all of the sheets you want to download here. It should follow the structure like this.
 > [!NOTE]
-> Spreadsheet ID can be found in your sheet link, ie https://docs.google.com/spreadsheets/d/spreadsheetId/edit?gid=0#gid=0
+> Spreadsheet ID can be found in your sheet link, ie https://docs.google.com/spreadsheets/d/<SPREADSHEET_ID_IS_HERE>/edit?gid=0#gid=0
 
 | outputname | spreadsheetId | tabName |
 | ---------------- | ------------------------------- | ---------------- |
