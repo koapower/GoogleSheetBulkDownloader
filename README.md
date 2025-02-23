@@ -16,7 +16,7 @@ A C# console tool that downloads multiple Google Sheets tabs as CSV files based 
 | ````EndColumn```` | The max column the downloader read, default is 26, which means the downloader will read from A to Z column. |
 | ````GoogleServiceAccountName```` | Your google service account name. |
 | ````JsonCredentialFilePath```` | Your credential json file. |
-5. Open any of your spreadsheet and create a sheet, name it ````TableConfig````. You will be putting all of the sheets you want to download here. It should follow the structure like this.
+5. Open any of your spreadsheet and create a sheet tab, name the tab ````TableConfig````. You will be putting all of the sheets you want to download here. It should follow the structure like this.
 > [!NOTE]
 > Spreadsheet ID can be found in your sheet link, ie https://docs.google.com/spreadsheets/d/spreadsheetId/edit?gid=0#gid=0
 
@@ -25,7 +25,7 @@ A C# console tool that downloads multiple Google Sheets tabs as CSV files based 
 | Sheet1OutputName | Sheet1SpreadsheetId | Sheet1TabName |
 | Sheet2OutputName | Sheet2SpreadsheetId | Sheet2TabName |
 | MapData | 1a2b3c4d5e6f7g8h9i0j1k2l3m4n5o6p | Map |
-6. Make sure *all* your google sheets (including the actual sheets you want to download) can be accessed by your service account. It can be done by clicking "File" -> "Share" and set your service account as a "Viewer".
+6. Make sure *all* of your google sheets (including the actual sheets you want to download) can be accessed by your service account. It can be done by clicking "File" -> "Share" and set your service account as a "Viewer".
 7. Open ````TableConfig.csv```` with a text editor and copy your ````TableConfig```` spreadsheet ID like this. Downloader supports multiple ````TableConfig```` spreadsheets.
 ````csv
 name(optional),spreadsheetid,tabName
