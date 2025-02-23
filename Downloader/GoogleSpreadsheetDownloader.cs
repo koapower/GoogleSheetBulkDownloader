@@ -1,22 +1,21 @@
 ﻿using CsvHelper;
 using GoogleSheetBulkDownloader.Downloader.Item;
 using GoogleSheetsWrapper;
-using Microsoft.Extensions.Configuration;
 using System.Globalization;
 
 namespace GoogleSheetBulkDownloader.Downloader
 {
-    internal class GoogleSpreadsheetDownloader
+    public class GoogleSpreadsheetDownloader
     {
-        IConfigurationRoot settings;
+        readonly DownloaderConfig settings;
         string jsonCredential;
         int endColumn;
 
-        public GoogleSpreadsheetDownloader(IConfigurationRoot settings)
+        public GoogleSpreadsheetDownloader(DownloaderConfig settings)
         {
             this.settings = settings;
-            jsonCredential = File.ReadAllText(settings["JsonCredentialFilePath"]);
-            if (!int.TryParse(settings["EndColumn"], CultureInfo.InvariantCulture, out endColumn))
+            jsonCredential = File.ReadAllText(settings.JsonCredentialFilePath);
+            if (!int.TryParse(settings.EndColumn, CultureInfo.InvariantCulture, out endColumn))
             {
                 endColumn = 26; //預設讀取到Z欄
             }
@@ -33,7 +32,7 @@ namespace GoogleSheetBulkDownloader.Downloader
         {
             Console.WriteLine("Reading TableConfig csv file...");
             var tableConfigs = new List<TableConfigRow>();
-            using (var reader = new StreamReader(settings["TableConfigCsvFilePath"]))
+            using (var reader = new StreamReader(settings.TableConfigCsvFilePath))
             {
                 using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
                 {
@@ -83,7 +82,7 @@ namespace GoogleSheetBulkDownloader.Downloader
 
         private void DownloadSheetAsCsv(SheetHelper sheetHelper, string outputName)
         {
-            var outputFolder = settings["OutputFolder"];
+            var outputFolder = settings.OutputFolder;
             if(!Directory.Exists(outputFolder))
                 Directory.CreateDirectory(outputFolder);
 
@@ -106,7 +105,7 @@ namespace GoogleSheetBulkDownloader.Downloader
             // https://docs.google.com/spreadsheets/d/<SPREADSHEET_ID_IS_HERE>/edit#gid=0
                 sheetId,
             // The email for the service account you created
-                settings["GoogleServiceAccountName"],
+                settings.GoogleServiceAccountName,
             // the name of the tab you want to access, leave blank if you want the default first tab
                 tabName);
 
@@ -122,7 +121,7 @@ namespace GoogleSheetBulkDownloader.Downloader
             // https://docs.google.com/spreadsheets/d/<SPREADSHEET_ID_IS_HERE>/edit#gid=0
                 sheetId,
             // The email for the service account you created
-                settings["GoogleServiceAccountName"],
+                settings.GoogleServiceAccountName,
             // the name of the tab you want to access, leave blank if you want the default first tab
                 tabName);
 
