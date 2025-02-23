@@ -7,7 +7,7 @@ A C# console tool that downloads multiple Google Sheets tabs as CSV files based 
 1. Download the latest version at [Release Page](https://github.com/koapower/GoogleSheetBulkDownloader/releases).
 2. Unzip the files in the same folder.
 3. Place your credential json file in the same folder, just like the ````project-1234567890123-abcdefgh1319.json```` file.
-4. Open DownloaderSetting.json with a text editor. You *must* change ````GoogleServiceAccountName```` and ````JsonCredentialFilePath```` to your own account and credential json file.
+4. Open ````DownloaderSetting.json```` with a text editor. You *must* change ````GoogleServiceAccountName```` and ````JsonCredentialFilePath```` to your own account and credential json file.
 
 | Field Name | Description |
 | ---------------- | ------------------------------- |
@@ -26,7 +26,7 @@ A C# console tool that downloads multiple Google Sheets tabs as CSV files based 
 | Sheet2OutputName | Sheet2SpreadsheetId | Sheet2TabName |
 | MapData | 1a2b3c4d5e6f7g8h9i0j1k2l3m4n5o6p | Map |
 6. Make sure *all* your google sheets (including the actual sheets you want to download) can be accessed by your service account. It can be done by clicking "File" -> "Share" and set your service account as a "Viewer".
-7. Open TableConfig.csv and copy your ````TableConfig```` spreadsheet ID like this. Downloader supports multiple ````TableConfig```` spreadsheets.
+7. Open ````TableConfig.csv```` with a text editor and copy your ````TableConfig```` spreadsheet ID like this. Downloader supports multiple ````TableConfig```` spreadsheets.
 ````csv
 name(optional),spreadsheetid,tabName
 TableConfig1,TableConfig1_Spreadsheet_ID,TableConfig
