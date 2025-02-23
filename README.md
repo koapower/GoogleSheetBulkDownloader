@@ -12,7 +12,7 @@ A C# console tool that downloads multiple Google Sheets tabs as CSV files based 
 | Field Name | Description |
 | ---------------- | ------------------------------- |
 | ````OutputFolder```` | The output folder path. Csv will be downloaded into this folder. |
-| ````TableConfigCsvFilePath```` | The tableconfig csv file. This is used to list all the tableconfig google sheets (not the actual sheets you want to download). |
+| ````TableConfigCsvFilePath```` | The tableconfig csv file. This file is used to list all the ````TableConfig```` google sheets (not the actual sheets you want to download). |
 | ````EndColumn```` | The max column the downloader read, default is 26, which means the downloader will read from A to Z column. |
 | ````GoogleServiceAccountName```` | Your google service account name. |
 | ````JsonCredentialFilePath```` | Your credential json file. |
@@ -34,11 +34,38 @@ TableConfig2,TableConfig2_Spreadsheet_ID,TableConfig
 ````
 8. Run ````GoogleSheetBulkDownloader.exe````, the csv files will be downloaded to the output folder.
 
+## What's Next?
+The downloader looks up the local ````TableConfig.csv```` to find the ````TableConfig```` google sheets. Then it looks up your ````TableConfig```` google sheets to download all the actual sheets. You can keep adding new sheets to download following this structure.
+````
+For Example:
+[Local TableConfig.csv]
+name(optional),spreadsheetid,tabName
+TableConfig1,TableConfig1_Spreadsheet_ID,TableConfig
+TableConfig2,TableConfig2_Spreadsheet_ID,TableConfig
+
+[GoogleSheet TableConfig1]
+outputname   | spreadsheetId       | tabName
+SheetAOutput | SheetASpreadsheetId | SheetA
+SheetBOutput | SheetBSpreadsheetId | SheetB
+SheetCOutput | SheetCSpreadsheetId | SheetC
+
+[GoogleSheet TableConfig2]
+outputname   | spreadsheetId       | tabName
+SheetDOutput | SheetDSpreadsheetId | SheetD
+SheetEOutput | SheetESpreadsheetId | SheetE
+
+Local TableConfig.csv => GoogleSheet TableConfig1 => SheetA
+                                                  => SheetB
+                                                  => SheetC
+                      => GoogleSheet TableConfig2 => SheetD
+                                                  => SheetE
+````
+
 ## Setup Google Service Account and get credential json
 1. Create a Google Cloud Project.
 2. Enable "Google Sheets API" and "Google Drive API".
 3. Go to "APIs & Services > Credentials" and choose "CREATE CREDENTIALS > Service account".
 4. Fill out the form and click "Create" and "Done".
 5. Go to "IAM & Admin > Service Accounts > Keys" and click "ADD KEY > Create new key".
-6. Select JSON key type and press "Create". (The file will be downloaded automatically.)
+6. Select JSON key type and press "Create". The file will be downloaded automatically.
 
