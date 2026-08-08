@@ -7,7 +7,7 @@ namespace GoogleSheetBulkDownloader.Downloader.Item
     /// </summary>
     internal class TableConfigRow
     {
-        [Name("name(optional)")]
+        [Name("name", "name(optional)")]
         [Optional]
         public string Name { get; set; }
         [Name("spreadsheetid")]

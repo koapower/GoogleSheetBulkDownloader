@@ -7,5 +7,6 @@
         public string GoogleServiceAccountName;
         public string TableConfigCsvFilePath;
         public string JsonCredentialFilePath;
+        public string MaxParallelDownloads;
     }
 }

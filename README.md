@@ -16,6 +16,7 @@ A C# console tool that downloads multiple Google Sheets tabs as CSV files based 
 | ````EndColumn```` | The max column the downloader read, default is 26, which means the downloader will read from A to Z column. |
 | ````GoogleServiceAccountName```` | Your google service account name. |
 | ````JsonCredentialFilePath```` | Your credential json file. |
+| ````MaxParallelDownloads```` | (Optional) How many spreadsheets are downloaded in parallel, default is 5. Note the Google Sheets API read quota is 60 requests per minute per user. |
 5. Open any of your spreadsheet and create a sheet tab, name the tab ````TableConfig````. You will be putting all of the sheets you want to download here. It should follow the structure like this.
 > [!NOTE]
 > Spreadsheet ID can be found in your sheet link, ie https://docs.google.com/spreadsheets/d/<SPREADSHEET_ID_IS_HERE>/edit?gid=0#gid=0
@@ -28,18 +29,30 @@ A C# console tool that downloads multiple Google Sheets tabs as CSV files based 
 6. Make sure *all* of your google sheets (including the actual sheets you want to download) can be accessed by your service account. It can be done by clicking "File" -> "Share" and set your service account as a "Viewer".
 7. Open ````TableConfig.csv```` with a text editor and copy your ````TableConfig```` spreadsheet ID like this. Downloader supports multiple ````TableConfig```` spreadsheets.
 ````csv
-name(optional),spreadsheetid,tabName
+name,spreadsheetid,tabName
 TableConfig1,TableConfig1_Spreadsheet_ID,TableConfig
 TableConfig2,TableConfig2_Spreadsheet_ID,TableConfig
 ````
 8. Run ````GoogleSheetBulkDownloader.exe````, the csv files will be downloaded to the output folder.
+
+## Command line arguments
+| Argument | Description |
+| ---------------- | ------------------------------- |
+| (no args) | Download every ````TableConfig```` listed in the local ````TableConfig.csv````. |
+| ````--sheets <name> <name> ...```` | Only download the ````TableConfig````s whose ````name```` column matches. Names are space separated, duplicated names are ignored. |
+| ````--help````, ````-h```` | Print usage. |
+````
+For Example:
+GoogleSheetBulkDownloader.exe --sheets TableConfig1
+GoogleSheetBulkDownloader.exe --sheets TableConfig1 TableConfig2
+````
 
 ## What's Next?
 The downloader looks up the local ````TableConfig.csv```` to find the ````TableConfig```` google sheets. Then it looks up your ````TableConfig```` google sheets to download all the actual sheets. You can keep adding new sheets to download following this structure.
 ````
 For Example:
 [Local TableConfig.csv]
-name(optional),spreadsheetid,tabName
+name,spreadsheetid,tabName
 TableConfig1,TableConfig1_Spreadsheet_ID,TableConfig
 TableConfig2,TableConfig2_Spreadsheet_ID,TableConfig
 
